@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Game</title>
+    <style>
+      canvas {
+        border: 2px solid black;
+        background-color: #87ceeb;
+      }
+    </style>
+  </head>
+  <body onload="startGame()">
+    <div id="canvas"></div>
+    <h1>block hopper</h1>
+
+    <script>
+      const width = 600
+      const height = 400
+
+      const gameCanvas = {
+        canvas: document.createElement('canvas'),
+        start: function () {
+          this.canvas.width = width
+          this.canvas.height = height
+          this.context = this.canvas.getContext('2d')
+          document.body.insertBefore(this.canvas, document.body.childNodes[0])
+        },
+      }
+
+      const startGame = () => gameCanvas.start()
+    </script>
+  </body>
+</html>

@@ -6,31 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Game</title>
     <style>
+      body {
+        background-color: #232136;
+        color: lightgray;
+      }
+
       canvas {
-        border: 2px solid black;
+        border: 2px solid lightgray;
         background-color: #87ceeb;
       }
     </style>
   </head>
   <body onload="startGame()">
     <div id="canvas"></div>
-    <h1>block hopper</h1>
 
     <script>
-      const width = 600
-      const height = 400
+      const canvasWidth = 600
+      const canvasHeight = 400
 
       const gameCanvas = {
         canvas: document.createElement('canvas'),
         start: function () {
-          this.canvas.width = width
-          this.canvas.height = height
+          this.canvas.width = canvasWidth
+          this.canvas.height = canvasHeight
           this.context = this.canvas.getContext('2d')
           document.body.insertBefore(this.canvas, document.body.childNodes[0])
         },
       }
+      const startGame = () => {
+        gameCanvas.start()
+        player = new createPlayer(30, 30, 10)
+      }
 
-      const startGame = () => gameCanvas.start()
+      let fallSpeed = 0
+      const interval = setInterval(updateCanvas, 20)
+
+      function createPlayer(width, height, x) {
+        this.width = width
+        this.height = height
+        this.x = x
+        this.y = 200
+
+        this.draw = function () {
+          ctx = gameCanvas.context
+          ctx.fillStyle = 'green'
+          ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+
+        this.makeFall = function () {
+          this.y += fallSpeed
+          fallSpeed += 0.1
+        }
+      }
+
+      const updateCanvas = () => {
+        ctx = gameCanvas.context
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+      }
     </script>
   </body>
 </html>
